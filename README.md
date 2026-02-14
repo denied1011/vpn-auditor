@@ -1,62 +1,28 @@
-# VPN Auditor v1.0
+# 🛡️ VPN Auditor v1.1.0
 
-A lightweight and powerful network diagnostic tool designed for enthusiasts and engineers to analyze proxy server availability and detect DPI (Deep Packet Inspection) filtering patterns.
+Профессиональный инструмент для автоматизированного аудита и технического анализа VPN-конфигураций. Приложение разработано для кроссплатформенного использования и ориентировано на сетевых инженеров и разработчиков ПО.
 
----
+## 📋 Основные возможности
 
-## 🚀 Key Features
+* **Мультипротокольный парсинг**:
+    * Полная поддержка стандартных ссылок: VLESS, VMESS, Trojan и Shadowsocks.
+    * Прямая обработка конфигураций в формате YAML (Clash / Clash.Meta).
+    * Интеллектуальное декодирование Base64 с автоматическим исправлением паддинга.
+* **Сетевой аудит**:
+    * **Latency Audit**: Замер реальной задержки (ping) до каждого узла в миллисекундах.
+    * **CDN & Multi-Node Support**: Корректное распознавание нескольких серверов на одном IP-адресе.
+    * **Handshake Diagnostic**: Определение статуса узла через проверку SSL и таймаутов.
+* **Обход ограничений**:
+    * **Header Spoofing**: Ротация User-Agent и сетевых заголовков для работы с защищенными панелями управления.
+    * **Smart Filtering**: Игнорирование локальных адресов-заглушек (0.0.0.0) и системных уведомлений сервера.
 
-* **Multi-Protocol Parsing**: Automatically extract **VLESS, VMess, Trojan, and Shadowsocks** configurations from raw text, links, or subscription URLs.
-* **GitHub Repository Scanner**: Advanced folder scanning (format `.../tree/main/...`) to discover and audit configuration files within GitHub repositories.
-* **White-List Detector**: Checks internet connectivity by comparing access to local and global resources (Yandex vs. Google).
-* **DPI Stress Test**: Simulates real user traffic using **Safari/iPhone User-Agent masking** to trigger and identify active blocking during data transmission.
+## 🚀 Быстрый старт
 
----
+1.  Установите приложение на Android или iOS устройство.
+2.  Введите URL-адрес вашей подписки или выберите путь к GitHub-репозиторию.
+3.  Нажмите **«Старт»** для инициализации процесса сканирования и аудита.
 
-## 🛠 Audit Methodology
-
-VPN Auditor goes beyond simple pings by analyzing the behavior of the connection under payload stress:
-
-1. **Handshake Check**: Establishes a primary TLS connection. Failure here indicates a **Protocol/SSL Block**.
-2. **Payload Stress Test**: Initiates a full `GET` request. This is crucial as modern DPI systems often allow initial packets and drop traffic only after identifying encryption patterns.
-3. **Reset Analysis**: Precisely identifies the moment of session termination (errors like `-1005`, `SocketTimeout`, or `Connection Reset`), marking it as a **DPI CUT**.
-
----
-
-## 📊 Status Interpretation
-
-| Status | Technical Verdict |
-| :--- | :--- |
-| **Alive (Ping)** | The node is fully functional; data transfer is successful. |
-| **DPI CUT (Reset)** | The connection opens but is forcibly closed by the ISP during traffic analysis. |
-| **SSL Block** | The connection is blocked at the encryption establishment stage. |
-| **Alive (Low Data)** | The IP is reachable, but the mask-server returned an empty or restricted response (typical for VLESS/Reality). |
-| **Banned / Unavailable** | Complete node unavailability or IP-address blacklisting. |
-
----
-
-## 📥 Compatibility
-
-* **Android**: Supports devices running **Android 10 (API 29)** and above.
-* **iOS**: Optimized for iPhone running **iOS 16.0+**.
-
----
-
-## 🇷🇺 Описание на русском (Russian Version)
-
-**VPN Auditor** — это инструмент для технического аудита прокси-серверов. 
-
-### Основные функции:
-* **Парсинг конфигов**: Поддержка VLESS, VMess, Trojan, Shadowsocks.
-* **Сканер GitHub**: Автоматический поиск файлов конфигураций внутри папок репозиториев.
-* **DPI Стресс-тест**: Проверка устойчивости соединения к анализу трафика системами ТСПУ.
-* **Детектор "Чебурнета"**: Быстрая проверка режима "белых списков" (доступность только RU-ресурсов).
-
-### Значение статусов:
-* **Живой**: Полная проходимость трафика.
-* **DPI CUT**: Соединение обрывается провайдером после начала передачи данных.
-* **SSL Block**: Блокировка протокола на этапе рукопожатия.
-* **Бан / Ошибка**: Узел полностью недоступен.
-
----
-Developed by **denied1011**
+## 📦 Версия v1.1.0
+* Добавлен парсинг YAML (Clash).
+* Реализована проверка пинга для каждого узла.
+* Оптимизирована работа с подписками через ротацию заголовков.
